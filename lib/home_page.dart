@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/home_controller.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  var counter = 0;
+  @override
   Widget build(BuildContext context) {
-    var controller = context.dependOnInheritedWidgetOfExactType<HomeController>()!;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('AppBar Demo')
-      ),
+      appBar: AppBar(title: const Text('AppBar Demo')),
       body: Center(
-        child: Text('Contador: ${controller.value}'),
+        child: Text('Contador: $counter'),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        onPressed: () {
-        controller.increment();
-      }),
+      floatingActionButton:
+          FloatingActionButton(child: Icon(Icons.add), onPressed: () {
+            setState(() {
+              counter++;
+            });
+          }),
     );
   }
 }
